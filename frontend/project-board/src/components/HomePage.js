@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Redirect,Route} from "react-router-dom"
-import {Grid,TextField,Paper,Button,Modal} from '@material-ui/core/';
+import {Grid,TextField,Paper,Button,Modal, Container} from '@material-ui/core/';
 import BoardComponent from './BoardComponent'
 import { blue } from "@material-ui/core/colors";
 
@@ -165,25 +165,30 @@ class HomePage extends  React.Component{
         }
         const pb = this.state.projectBoards;
         return(
-            <Grid  container spacing={3}>   
+          <Container>
+            <Grid  container spacing={3} >   
                 <Grid item xs={12}>
                             
                 <CreateForm state = {this.state}/>
                 </Grid>
 
-                <Grid item xs={12}>NAME</Grid> 
+                
                     {pb.map(item=>(
                         <Grid key={item._id} item xs={4} offset={2}>
-                        <Paper elevation={3} variant="elevation" style={{height:50,backgroundColor:"#2196F3"}}>{item.name}</Paper>
+                        <Paper elevation={3} variant="elevation" style={{height:50,backgroundColor:"#f5f5f5"}}><h1>{item.name}</h1></Paper>
                         <Paper >Create On:{item.date}</Paper>
-                        <Button variant="contained"
-                color="primary"onClick={(event)=>{this.setState({toBoard:true,board_json:item})}}>OPEN</Button>
-                        <Button variant="contained"
+                        <Paper >
+                        <Button style={{marginLeft:'5%'}} variant="contained"
+                color="primary" onClick={(event)=>{this.setState({toBoard:true,board_json:item})}}>OPEN</Button>
+                        <Button style={{marginLeft:'5%'}} variant="contained"
                 color="secondary" onClick={()=>{this.deleteBoard(item.name)}}>DELETE</Button>
+                        </Paper>
                         </Grid>
+                        
                     ))}
                     
             </Grid>
+            </Container>
             //<BoardComponent board_json = {this.project}/>
         );
     }

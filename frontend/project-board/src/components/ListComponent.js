@@ -194,7 +194,7 @@ class ListComponent extends React.Component{
             {pb.map(item=>(
                 <Grid  item direction="row" key={item.id} >    
                 
-                <Paper elevation={5} variant="elevation" style={{fontSize:40,backgroundColor:"white"}} >
+                <Paper elevation={5} variant="elevation" style={{fontSize:20,backgroundColor:"white"}} >
                                         
                 <Grid item >{item.cardname}</Grid>
                 <Grid item >
@@ -205,17 +205,17 @@ class ListComponent extends React.Component{
                 }}}/>
                 </Grid>
                 <Grid item >
-                <Button style={{margin:5,height:40,fontSize:10,width:10}} onClick={()=>{this.DeleteCard(item)}} variant="contained" color="secondary">
-                    Delete Card
+                <Button style={{margin:5,fontSize:10}} onClick={()=>{this.DeleteCard(item)}} variant="contained" color="secondary">
+                    DELETE
                 </Button>
-                <Button style={{margin:5,height:40,fontSize:10,width:10}} onClick={()=>{
+                <Button style={{margin:5,fontSize:10}} onClick={()=>{
                                     this.setState({due_date:item.due_date,attachment:item.attachment})
                                     if(this.state.showPropName==undefined)
                                         this.setState({c_name:item.cardname,showPropName:item.cardname})
                                     else
                                         this.setState({c_name:item.cardname,showPropName:undefined})
                                     }} variant="contained" color="default">
-                    Show Properties
+                    EXPAND
                 </Button>
                 </Grid>
                 </Paper>                
@@ -242,7 +242,7 @@ class ListComponent extends React.Component{
                     />
             </Grid>
             <Grid item xs={2} >
-                <Button style={{height:40,fontSize:10,width:10,left:50}} onClick={()=>{this.AddCard(this.state.list_name)}} variant="contained" color="primary">
+                <Button onClick={()=>{this.AddCard(this.state.list_name)}} variant="contained" color="primary">
                     Add Card
                 </Button>
             </Grid>

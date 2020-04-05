@@ -1,7 +1,7 @@
 import React from "react";
 import {useParams} from "react-router-dom"
 import ReactDOM from "react-dom";
-import {Grid,Paper,Button,TextField} from '@material-ui/core/';
+import {Grid,Paper,Button,TextField,Container} from '@material-ui/core/';
 import ListComponent from "./ListComponent"
 
 
@@ -151,15 +151,17 @@ class BoardComponent extends React.Component{
             {
             pb.map(item=>(
                 <React.Fragment>
-                <Grid key={item.id}   xs={4} offset={2} >
+                
+                <Grid container key={item.id}   xs={4} offset={2} >
                     <Grid item  >
-                    <Paper elevation={3} variant="elevation" style={{backgroundColor:"#2196F3"}}>{item.listname}
+                    <Paper elevation={3} variant="elevation" style={{backgroundColor:"#f5f5f5"}}>
+                        <h1>{item.listname}</h1>
                     
-                    <Button style={{height:40,fontSize:10,width:10,left:160}} onClick={()=>{this.DeleteList(item)}} variant="contained" color="secondary">
-                        Delete List
-                    </Button>
+                   
                 <ListComponent b_name = {this.props.board_json.name} l_name = {item.listname} list_json={item}/>
-                                      
+                                <Button style={{height:40,fontSize:10,width:10}} onClick={()=>{this.DeleteList(item)}} variant="contained" color="secondary">
+                        Delete List
+                    </Button>       
                     </Paper>
                     </Grid>
                     
