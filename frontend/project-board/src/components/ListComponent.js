@@ -8,6 +8,7 @@ class ListComponent extends React.Component{
     constructor(props){
         super(props)
         this.state={
+            username:props.username,
             due_date:"",
             attachment:"",
             c_id:0,
@@ -48,7 +49,7 @@ class ListComponent extends React.Component{
                     b_name:this.props.b_name,
                     l_name:this.state.list_name,
                     c_json:this.state.card_json,
-                    createdby:"waleedj1699@gmail.com"}) // body data type must match "Content-Type" header
+                    createdby:this.state.username}) // body data type must match "Content-Type" header
             }
             //console.log(this.state.b_name)
             fetch("https://aqueous-brushlands-30336.herokuapp.com/deletecard",options)
@@ -87,7 +88,7 @@ class ListComponent extends React.Component{
                 l_name:l_name,
                 b_name:this.props.b_name,
                 c_json:this.state.card_json,
-                date:date,createdby:"waleedj1699@gmail.com"}) // body data type must match "Content-Type" header
+                date:date,createdby:this.state.username}) // body data type must match "Content-Type" header
         }
         //console.log(this.state.list_name)
         fetch("https://aqueous-brushlands-30336.herokuapp.com/"+toPerform+"card",options)
@@ -114,6 +115,7 @@ class ListComponent extends React.Component{
             this.setState({c_id:this.state.c_id+1})
             this.setState({card_json:[...this.state.card_json,{cardname:this.state.c_name,id:this.state.c_id+1}]},()=>{this.makeFetchPost(l_name,"create")})
             //this.setState({list_json:[...this.state.list_json]})
+            this.setState({c_name:""})
         }
     }
     handleChange(event){
@@ -137,8 +139,9 @@ class ListComponent extends React.Component{
 
 
     render(){
-
+        
         let CardProps = (props)=>{
+            
             console.log(props.showProp,props)
             if(props.showProp()){
                 return(
@@ -182,7 +185,8 @@ class ListComponent extends React.Component{
                 )
             }
             return <></>
-        }    
+        }
+
         let pb = []
         if(this.state.card_json==undefined){
             this.setState({card_json:[]},()=>{pb = this.state.card_json})
@@ -192,23 +196,23 @@ class ListComponent extends React.Component{
         return(
             <Grid >
             {pb.map(item=>(
-                <Grid  item direction="row" key={item.id} >    
+                <Grid  item direction="row" key={"list_" + item.id} >    
                 
-                <Paper elevation={5} variant="elevation" style={{fontSize:20,backgroundColor:"white"}} >
-                                        
-                <Grid item >{item.cardname}</Grid>
-                <Grid item >
+                <Paper elevation={5} variant="elevation" style={{backgroundColor:"white"}} >
+                <Grid container>                        
+                <Grid item xs={9} >{item.cardname}</Grid>
+                {/* <Grid item >
                 <CardProps attach={item.attachment} d_date={item.due_date} showProp={()=>{if(item.cardname===this.state.showPropName){
                     return true
                 }else{
                     return false
                 }}}/>
-                </Grid>
-                <Grid item >
-                <Button style={{margin:5,fontSize:10}} onClick={()=>{this.DeleteCard(item)}} variant="contained" color="secondary">
-                    DELETE
+                </Grid> */}
+                <Grid item xs={1}>
+                <Button style={{margin:3}} onClick={()=>{this.DeleteCard(item)}} variant="contained" color="secondary">
+                    -
                 </Button>
-                <Button style={{margin:5,fontSize:10}} onClick={()=>{
+                {/* <Button style={{margin:5,fontSize:10}} onClick={()=>{
                                     this.setState({due_date:item.due_date,attachment:item.attachment})
                                     if(this.state.showPropName==undefined)
                                         this.setState({c_name:item.cardname,showPropName:item.cardname})
@@ -216,7 +220,8 @@ class ListComponent extends React.Component{
                                         this.setState({c_name:item.cardname,showPropName:undefined})
                                     }} variant="contained" color="default">
                     EXPAND
-                </Button>
+                </Button> */}
+                </Grid>
                 </Grid>
                 </Paper>                
                 </Grid>
@@ -243,7 +248,7 @@ class ListComponent extends React.Component{
             </Grid>
             <Grid item xs={2} >
                 <Button onClick={()=>{this.AddCard(this.state.list_name)}} variant="contained" color="primary">
-                    Add Card
+                    +
                 </Button>
             </Grid>
             </Grid>

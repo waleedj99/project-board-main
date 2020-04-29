@@ -3,14 +3,17 @@ import {useParams} from "react-router-dom"
 import ReactDOM from "react-dom";
 import {Grid,Paper,Button,TextField,Container} from '@material-ui/core/';
 import ListComponent from "./ListComponent"
+import HomePage from "./HomePage"
 
 
 class BoardComponent extends React.Component{
     constructor(props){
         super(props)
         this.state={
+            username:props.username,
             c_id:0,
             l_name:"",
+            toHome:false,
             list_json:this.props.board_json.l_json
         }
         this.AddList = this.AddList.bind(this)
@@ -61,6 +64,7 @@ class BoardComponent extends React.Component{
         if(this.state.l_name.length>0){
         this.setState({c_id:this.state.c_id+1})
         this.setState({list_json:[...this.state.list_json,{listname:this.state.l_name,id:this.state.c_id+1}]},this.makeFetchPost)
+        this.setState({l_name:""})    
     }}
 
 
@@ -82,7 +86,7 @@ class BoardComponent extends React.Component{
                 body: JSON.stringify({
                     b_name:this.props.board_json.name,
                     l_json:this.state.list_json,
-                    createdby:"waleedj1699@gmail.com"}) // body data type must match "Content-Type" header
+                    createdby:this.state.username}) // body data type must match "Content-Type" header
             }
             //console.log(this.state.b_name)
             fetch("https://aqueous-brushlands-30336.herokuapp.com/deletelist",options)
@@ -116,9 +120,14 @@ class BoardComponent extends React.Component{
         }else{
             pb = this.state.list_json
         }
-        
+        if(this.state.toHome==true)
+            return(<HomePage username={this.state.username}></HomePage>)
     return(
-        <Grid container spacing={3}>
+        <Grid style={{margin:"3em"}}container spacing={3}>
+            
+                <Button variant="outlined" onClick={(event)=>{this.setState({toHome:true})}}>Back</Button>
+            
+            
             <Grid item >
                 <h1>{this.props.board_json.name}</h1>
             </Grid>
@@ -158,7 +167,7 @@ class BoardComponent extends React.Component{
                         <h1>{item.listname}</h1>
                     
                    
-                <ListComponent b_name = {this.props.board_json.name} l_name = {item.listname} list_json={item}/>
+                <ListComponent username={this.state.username} b_name = {this.props.board_json.name} l_name = {item.listname} list_json={item}/>
                                 <Button style={{height:40,fontSize:10,width:10}} onClick={()=>{this.DeleteList(item)}} variant="contained" color="secondary">
                         Delete List
                     </Button>       
