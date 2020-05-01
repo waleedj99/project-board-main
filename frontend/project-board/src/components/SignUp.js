@@ -68,19 +68,7 @@ class SignUp extends React.Component{
     render(){
         return (
           <>
-          <AppBar position="static">
-          <Toolbar>
-            
-            <Typography variant="h6" >
-              Project Board
-            </Typography>
-            <IconButton edge="end" color="inherit" aria-label="menu">
-            
-            </IconButton>
-            <NavLink style={{color:"white"}} to="/login">Login</NavLink>
-          </Toolbar>
-        </AppBar>
-
+          
         <Container component="main" maxWidth="xs">
         <form>
             <TextField
@@ -149,7 +137,9 @@ class SignUp extends React.Component{
             >
                 Sign Up
             </Button>
-
+            <Link href="/login" variant="body2">
+                    {"Already have an account? Login"}
+                </Link>
         </form>
         <ValidationErrorComp validationError={this.state.validationError}/>
         </Container>

@@ -62,19 +62,6 @@ class LoginPage extends React.Component{
   
         return (
           <>
-          <AppBar position="static">
-          <Toolbar>
-            
-            <Typography variant="h6" >
-              Project Board
-            </Typography>
-            <IconButton edge="end" color="inherit" aria-label="menu">
-            
-            </IconButton>
-            <NavLink style={{color:"white"}} to="/signup">Sign Up</NavLink>
-          </Toolbar>
-        </AppBar>
-    
             <Container component="main" maxWidth="xs">
         <form>
         <TextField

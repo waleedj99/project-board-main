@@ -123,14 +123,16 @@ class BoardComponent extends React.Component{
         if(this.state.toHome==true)
             return(<HomePage username={this.state.username}></HomePage>)
     return(
-        <Grid style={{margin:"3em"}}container spacing={3}>
-            
-                <Button variant="outlined" onClick={(event)=>{this.setState({toHome:true})}}>Back</Button>
+        <>
+        <Button variant="outlined" onClick={(event)=>{this.setState({toHome:true})}}>Back</Button>
             
             
             <Grid item >
                 <h1>{this.props.board_json.name}</h1>
             </Grid>
+        <Grid style={{margin:"1em"}}container spacing={3}>
+            
+            
             <Grid spacing={3}
                     container
                     direction="row"
@@ -156,19 +158,19 @@ class BoardComponent extends React.Component{
                 </Button>
             </Grid>
             </Grid>
-
+            
             {
             pb.map(item=>(
                 <React.Fragment>
                 
-                <Grid container key={item.id}   xs={4} offset={2} >
-                    <Grid item  >
+                <Grid container item key={item.id}   xs={4}  >
+                    <Grid item xs={10} >
                     <Paper elevation={3} variant="elevation" style={{backgroundColor:"#f5f5f5"}}>
                         <h1>{item.listname}</h1>
                     
                    
                 <ListComponent username={this.state.username} b_name = {this.props.board_json.name} l_name = {item.listname} list_json={item}/>
-                                <Button style={{height:40,fontSize:10,width:10}} onClick={()=>{this.DeleteList(item)}} variant="contained" color="secondary">
+                                <Button onClick={()=>{this.DeleteList(item)}} variant="contained" color="secondary">
                         Delete List
                     </Button>       
                     </Paper>
@@ -181,7 +183,7 @@ class BoardComponent extends React.Component{
             ))}
             
         </Grid>
-    
+        </>
 
         )
     }

@@ -47,7 +47,7 @@ function App() {
             <BoardComponent />
           </Route>
           <Route path="">
-            <Redirect to="/home"/>
+            <Redirect to="/login"/>
           </Route>
           
         </Switch>

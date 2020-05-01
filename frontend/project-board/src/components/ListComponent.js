@@ -194,44 +194,34 @@ class ListComponent extends React.Component{
             pb = this.state.card_json
         }
         return(
-            <Grid >
+            <Grid container>
             {pb.map(item=>(
-                <Grid  item direction="row" key={"list_" + item.id} >    
-                
-                <Paper elevation={5} variant="elevation" style={{backgroundColor:"white"}} >
-                <Grid container>                        
-                <Grid item xs={9} >{item.cardname}</Grid>
-                {/* <Grid item >
-                <CardProps attach={item.attachment} d_date={item.due_date} showProp={()=>{if(item.cardname===this.state.showPropName){
-                    return true
-                }else{
-                    return false
-                }}}/>
-                </Grid> */}
-                <Grid item xs={1}>
-                <Button style={{margin:3}} onClick={()=>{this.DeleteCard(item)}} variant="contained" color="secondary">
+                <Grid item container 
+                spacing={1}  
+
+                direction="row"
+                justify="center"
+                alignItems="center"
+                style={{backgroundColor:"#c3edea",marginBottom:"2%"}} 
+                key={"list_" + item.id} >    
+                            
+                                        
+            <Grid item xs={8}>
+                {item.cardname}
+            </Grid>
+            <Grid item >
+                <Button onClick={()=>{this.DeleteCard(item)}} variant="contained" color="secondary">
                     -
-                </Button>
-                {/* <Button style={{margin:5,fontSize:10}} onClick={()=>{
-                                    this.setState({due_date:item.due_date,attachment:item.attachment})
-                                    if(this.state.showPropName==undefined)
-                                        this.setState({c_name:item.cardname,showPropName:item.cardname})
-                                    else
-                                        this.setState({c_name:item.cardname,showPropName:undefined})
-                                    }} variant="contained" color="default">
-                    EXPAND
-                </Button> */}
-                </Grid>
-                </Grid>
-                </Paper>                
+                </Button>    
+            </Grid>             
                 </Grid>
             ))}
-            <Grid spacing={3}
-                    container
+            <Grid item container spacing={1}
+                    
                     direction="row"
                     justify="center"
                     alignItems="center">
-            <Grid item xs={6} >
+            <Grid item  >
                 <TextField
                         variant="outlined"
                         margin="normal"
@@ -246,7 +236,7 @@ class ListComponent extends React.Component{
                         onChange={this.handleChange}
                     />
             </Grid>
-            <Grid item xs={2} >
+            <Grid item  >
                 <Button onClick={()=>{this.AddCard(this.state.list_name)}} variant="contained" color="primary">
                     +
                 </Button>
